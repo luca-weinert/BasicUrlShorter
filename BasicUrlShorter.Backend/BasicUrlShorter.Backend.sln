@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicUrlShorter.Backend", "BasicUrlShorter.Backend\BasicUrlShorter.Backend.csproj", "{FE7AE5D8-E57D-4CAD-BEFE-80C616508AEE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FE7AE5D8-E57D-4CAD-BEFE-80C616508AEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE7AE5D8-E57D-4CAD-BEFE-80C616508AEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE7AE5D8-E57D-4CAD-BEFE-80C616508AEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE7AE5D8-E57D-4CAD-BEFE-80C616508AEE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
