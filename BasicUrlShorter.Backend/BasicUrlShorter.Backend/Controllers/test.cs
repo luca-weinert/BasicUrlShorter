@@ -4,9 +4,9 @@ namespace BasicUrlShorter.Backend.Controllers;
 
 public class test : ControllerBase
 {
-    [HttpGet("/{test}")]
+    [HttpGet("/test")]
     public IActionResult getTest()
     {
-        return Ok("");
+        return Redirect("https://youtube.com");
     }
 }
