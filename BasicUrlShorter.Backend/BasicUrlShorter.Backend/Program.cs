@@ -1,8 +1,12 @@
+using BasicUrlShorter.Backend.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSwaggerGen();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddControllers();
+builder.Services.AddSingleton<UrlShortenerService>();
+builder.Services.AddSingleton<MongoDbService>();
 
 var app = builder.Build();
 
