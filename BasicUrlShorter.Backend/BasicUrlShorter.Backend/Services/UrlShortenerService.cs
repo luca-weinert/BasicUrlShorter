@@ -12,9 +12,21 @@ public class UrlShortenerService
     {
         _postgresContext = postgresContext;
     }
-    
-    public ShortenUrl GenerateShortenedUrl(string fullUrl)
+
+    private async Task<Boolean> CheckGivenUrl(string url)
     {
+        var client = new HttpClient();
+        var response = await client.GetAsync(url);
+        return response.IsSuccessStatusCode;
+    }
+    
+    public async Task<ShortenUrl?> GenerateShortenedUrl(string fullUrl)
+    {
+        if (!await CheckGivenUrl(fullUrl))
+        {
+            Console.WriteLine("Site not responding");
+            return null;
+        }
         var code = RandomString.GetString(Types.ALPHANUMERIC_MIXEDCASE, 5);
         var shortenUrl = new ShortenUrl
         {
@@ -26,8 +38,9 @@ public class UrlShortenerService
         // _postgresContext.Database.EnsureDeleted();
         // _postgresContext.Database.EnsureCreated();
         _postgresContext.ShortenUrls.Add(shortenUrl);
-        _postgresContext.SaveChanges();
+        await _postgresContext.SaveChangesAsync();
         return shortenUrl;
+
     }
 
     public ShortenUrl? GetFullUrl(string code)

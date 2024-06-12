@@ -26,6 +26,5 @@ public class UrlShortenerController : ControllerBase
     {
         var fullUrl = _urlShortenerService.GetFullUrl(shortCode);
         return fullUrl;
-        //return Redirect(fullUrl.FullOriginalUrl);
     }
 }

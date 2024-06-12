@@ -5,7 +5,7 @@ namespace BasicUrlShorter.Backend.Services;
 
 public class PostgresContext : DbContext
 {
-    public DbSet<ShortenUrl> ShortenUrls { get; set; }
+    public DbSet<ShortenUrl?> ShortenUrls { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
