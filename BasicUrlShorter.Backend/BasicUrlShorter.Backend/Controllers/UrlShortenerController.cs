@@ -1,3 +1,4 @@
+using BasicUrlShorter.Backend.Models;
 using BasicUrlShorter.Backend.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,26 +9,23 @@ namespace BasicUrlShorter.Backend.Controllers;
 public class UrlShortenerController : ControllerBase
 {
     private readonly UrlShortenerService _urlShortenerService;
-    private PostgresContext _postgresContext;
-    
     public UrlShortenerController(UrlShortenerService urlShortenerService, PostgresContext postgresContext)
     {
         _urlShortenerService = urlShortenerService;
-        _postgresContext = postgresContext;
     }    
 
     [HttpPost("/short")]
     public IActionResult ShortUrl(string fullUrl)
     {
-        var ShortenedUrl = _urlShortenerService.GenerateShortenedUrl(fullUrl);
-        return Ok(ShortenedUrl);
+        var shortenedUrl = _urlShortenerService.GenerateShortenedUrl(fullUrl);
+        return Ok(shortenedUrl);
     }
     
     [HttpGet("/{shortCode}")]
-    public IActionResult RedirectUrl(string shortCode)
+    public ShortenUrl RedirectUrl(string shortCode)
     {
-        // var fullUrl = _urlShortenerService.GetOriginalUrl(shortCode);
-        // return Redirect(fullUrl);
-        return Ok("test");
+        var fullUrl = _urlShortenerService.GetFullUrl(shortCode);
+        return fullUrl;
+        //return Redirect(fullUrl.FullOriginalUrl);
     }
 }

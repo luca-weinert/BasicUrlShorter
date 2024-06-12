@@ -1,10 +1,10 @@
-using MongoDB.Bson;
-
 namespace BasicUrlShorter.Backend.Models;
 
 public class ShortenUrl
 {
-    public int ShortenUrlID { get; set; }
-    public string fullUrl { get; set; }
-    public string? shortenCode { get; set; }
+    public int Id { get; set; }
+    public string FullOriginalUrl { get; set; }
+    public string FullShortenUrl { get; set; }
+    public string? ShortCode { get; set; }
+    public int ClickCounter { get; set; } = 0;
 }
