@@ -1,3 +1,4 @@
+using Amazon.Runtime.Internal.Transform;
 using BasicUrlShorter.Backend.Models;
 using BasicUrlShorter.Backend.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -15,10 +16,10 @@ public class UrlShortenerController : ControllerBase
     }    
 
     [HttpPost("/short")]
-    public IActionResult ShortUrl(string fullUrl)
+    public async Task<IActionResult?> ShortUrl(string fullUrl)
     {
-        var shortenedUrl = _urlShortenerService.GenerateShortenedUrl(fullUrl);
-        return Ok(shortenedUrl);
+        var shortenedUrl = await _urlShortenerService.GenerateShortenedUrl(fullUrl);
+        return shortenedUrl == null ? null : Ok(shortenedUrl);
     }
     
     [HttpGet("/{shortCode}")]
