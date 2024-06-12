@@ -8,23 +8,26 @@ namespace BasicUrlShorter.Backend.Controllers;
 public class UrlShortenerController : ControllerBase
 {
     private readonly UrlShortenerService _urlShortenerService;
+    private PostgresContext _postgresContext;
     
-    public UrlShortenerController(UrlShortenerService urlShortenerService)
+    public UrlShortenerController(UrlShortenerService urlShortenerService, PostgresContext postgresContext)
     {
         _urlShortenerService = urlShortenerService;
-    }
-    
+        _postgresContext = postgresContext;
+    }    
+
     [HttpPost("/short")]
-    public IActionResult ShortUrl(string originalUrl)
+    public IActionResult ShortUrl(string fullUrl)
     {
-        var shortenUrl = _urlShortenerService.GetShortenUrl(originalUrl);
-        return Ok(shortenUrl);
+        var ShortenedUrl = _urlShortenerService.GenerateShortenedUrl(fullUrl);
+        return Ok(ShortenedUrl);
     }
     
     [HttpGet("/{shortCode}")]
     public IActionResult RedirectUrl(string shortCode)
     {
-        var fullUrl = _urlShortenerService.GetOriginalUrl(shortCode);
-        return Redirect(fullUrl);
+        // var fullUrl = _urlShortenerService.GetOriginalUrl(shortCode);
+        // return Redirect(fullUrl);
+        return Ok("test");
     }
 }

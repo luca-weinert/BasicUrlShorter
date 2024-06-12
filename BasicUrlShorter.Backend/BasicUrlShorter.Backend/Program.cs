@@ -6,7 +6,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddControllers();
 builder.Services.AddSingleton<UrlShortenerService>();
-builder.Services.AddSingleton<MongoDbService>();
+builder.Services.AddSingleton<PostgresContext>();
 
 var app = builder.Build();
 

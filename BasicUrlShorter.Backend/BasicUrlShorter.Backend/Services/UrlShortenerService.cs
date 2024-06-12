@@ -5,29 +5,22 @@ namespace BasicUrlShorter.Backend.Services;
 
 public class UrlShortenerService
 {
-    private readonly MongoDbService _mongoDbService;
-
-    public UrlShortenerService(MongoDbService mongoDbService)
+    private readonly PostgresContext _postgresContext;
+    
+    public UrlShortenerService(PostgresContext postgresContext)
     {
-        _mongoDbService = mongoDbService;
+        _postgresContext = postgresContext;
     }
-
-    public string GetOriginalUrl(string shortCode)
+    
+    public ShortenUrl GenerateShortenedUrl(string fullUrl)
     {
-        var shortenUrl = _mongoDbService.GetDocument(shortCode);
-        return shortenUrl.fullUrl;
-    }
-
-    public string GetShortenUrl(string originalUrl)
-    {
-
-        var randomString = RandomString.GetString(Types.ALPHANUMERIC_MIXEDCASE, 5);
-        var test = new ShortenUrl
+        var shortenUrl = new ShortenUrl
         {
-            fullUrl = originalUrl,
-            shortenCode = randomString
+            fullUrl = fullUrl,
+            shortenCode = RandomString.GetString(Types.ALPHANUMERIC_MIXEDCASE, 5)
         };
-        _mongoDbService.SaveDocument(test);
-        return randomString;
+        _postgresContext.ShortenUrls.Add(shortenUrl);
+        _postgresContext.SaveChanges();
+        return shortenUrl;
     }
 }
