@@ -5,5 +5,5 @@ namespace BasicUrlShorter.Backend.Models;
 public class ShortenUrl
 {
     public string fullUrl;
-    public string shortenCode;
+    public string? shortenCode;
 }

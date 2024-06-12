@@ -1,4 +1,5 @@
 using BasicUrlShorter.Backend.Models;
+using RandomString4Net;
 
 namespace BasicUrlShorter.Backend.Services;
 
@@ -19,14 +20,14 @@ public class UrlShortenerService
 
     public string GetShortenUrl(string originalUrl)
     {
-        var shorCode = Guid.NewGuid().ToString();
-        
+
+        var randomString = RandomString.GetString(Types.ALPHANUMERIC_MIXEDCASE, 5);
         var test = new ShortenUrl
         {
             fullUrl = originalUrl,
-            shortenCode = shorCode
+            shortenCode = randomString
         };
         _mongoDbService.SaveDocument(test);
-        return shorCode;
+        return randomString;
     }
 }
