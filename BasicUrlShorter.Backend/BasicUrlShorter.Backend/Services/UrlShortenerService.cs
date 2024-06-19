@@ -22,6 +22,8 @@ public class UrlShortenerService
     
     public async Task<ShortenUrl?> GenerateShortenedUrl(string fullUrl)
     {
+        // _postgresContext.Database.EnsureDeleted();
+        // _postgresContext.Database.EnsureCreated();
         if (!await CheckGivenUrl(fullUrl))
         {
             Console.WriteLine("Site not responding");
